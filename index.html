@@ -50,6 +50,30 @@ input, textarea, select { margin: 5pt 0; padding: 10px; border: 1px solid #ccc; 
 .noc-na-text { display: inline-block; padding: 6px 12px; background-color: #f8f9fa; color: #6c757d; border: 1px solid #dee2e6; border-radius: 4px; font-size: 0.85em; white-space: nowrap; font-weight: normal; } /* New style for N/A */
 
 #nocTemplateWrapper { position: absolute; left: -9999px; top: 0; }
+
+/* New Print Template Style (must match .details-row appearance) */
+.print-record {
+    padding: 20px;
+    background-color: #f0f8ff; 
+    border: 1px solid #cceeff; 
+    border-radius: 10px; 
+    margin-bottom: 20px;
+    page-break-after: always; /* Ensure each record starts on a new page */
+}
+.print-record h2 { font-size: 1.5em; margin-bottom: 15px; border-bottom: 2px solid #ddd; padding-bottom: 5px; color: #0d6efd;}
+.print-record .info-wrapper { display: flex; flex-wrap: wrap; gap: 20px;}
+.print-record .loan-details-box, .print-record .vehicle-details-box {
+    border: 1px solid #b3d9ff; padding: 15px; background: #ffffff; flex: 1 1 300px; border-radius: 8px;
+    /* Resetting box shadow for cleaner print */
+    box-shadow: none; 
+}
+.print-record .loan-details-box h3, .print-record .vehicle-details-box h3 {
+    margin-top: 0; color: #0d6efd; font-size: 1.2em; border-bottom: 1px dashed #ddd; padding-bottom: 10px; margin-bottom: 10px; 
+}
+.print-record strong { font-weight: bold; }
+.print-record .details-container { display: flex; flex-direction: column; gap: 15px; }
+
+
 @media (max-width: 768px) {.form-grid { grid-template-columns: 1fr; } .details-container .info-wrapper { flex-direction: column; } .loan-details-box, .vehicle-details-box { flex: 1 1 auto; } .section { margin: 10px; padding: 15px; } h1 { font-size: 1.5em; } .menu button { margin: 5px; padding: 10px 15px; font-size: 14px; } th, td { padding: 8px; font-size: 12px; }}
 .section-header { display:flex; justify-content:space-between; align-items:center; gap:12px; }
 .search-inline { display:flex; gap:8px; align-items:center; }
@@ -172,7 +196,7 @@ input, textarea, select { margin: 5pt 0; padding: 10px; border: 1px solid #ccc; 
 <h2>All Vehicle Data</h2>
 <div style="display:flex; gap:12px; align-items:center;">
 <div class="search-inline">
-<input id="searchInputData" type="text" placeholder="Search Vehicle No., Name, or Loan AG No." style="padding:8px 10px; width:220px;">
+<input id="searchInputData" type="text" placeholder="Search Vehicle No., Name, Loan AG No., or NOC." style="padding:8px 10px; width:220px;" onkeyup="handleSearchKey(event)">
 <button onclick="searchInVehicleData()" style="padding:8px 10px; background:#0d6efd; color:#fff; border:none; border-radius:6px; cursor:pointer;">Search</button>
 <button onclick="resetVehicleDataSearch()" style="padding:8px 10pt; background:#6c757d; color:#fff; border:none; border-radius:6px; cursor:pointer;">Reset</button>
 </div>
@@ -214,14 +238,14 @@ input, textarea, select { margin: 5pt 0; padding: 10px; border: 1px solid #ccc; 
     </div>
 </label>
 <label><span>Vehicle Number (10 Chars):</span> <input type="text" id="vehicleNumber" required maxlength="10" class="uppercase-input"></label>
-<label><span>Loan AG Number (Last 10 Digits):</span> <input type="text" id="loanAg" required maxlength="10" pattern="\d{10}" title="Must be exactly 10 digits for the custom part" class="uppercase-input"></label>
+<label><span>Loan AG Number (6 Chars):</span> <input type="text" id="loanAg" required maxlength="6" pattern=".{6}" title="Must be exactly 6 characters" class="uppercase-input"></label>
 <label><span>Loan Date:</span> <input type="date" id="loanDate" required></label>
 <label>
     <span onclick="toggleGuarantorFields()" style="cursor:pointer; font-weight:bold; color:#555; border-bottom: 1px dashed #ccc;">Guarantor Details: (Click to Enter Details) - OPTIONAL</span>
     <input type="hidden" id="combinedGuarantor" /> <div id="guarantorFields" style="display:none; margin-top: 5px; background: #f7f7f7; padding: 10pt; border-radius: 5px;">
         <label><span>Guarantor Surname:</span> <input type="text" id="guarantorSurname" placeholder="Guarantor Surname" class="uppercase-input"></label>
         <label><span>Guarantor Name:</span> <input type="text" id="guarantorName" placeholder="Guarantor Name" class="uppercase-input"></label>
-        <label><span>Guarantor Loan AG Number (16 Chars):</span> <input type="text" id="guarantorLoanAg" placeholder="Guarantor Loan AG Number (e.g., H00001XXXXXX)" maxlength="16" class="uppercase-input"></label>
+        <label><span>Guarantor Loan AG Number (6 Chars):</span> <input type="text" id="guarantorLoanAg" placeholder="Guarantor Loan AG Number (e.g., A12345)" maxlength="6" pattern=".{6}" title="Must be exactly 6 characters" class="uppercase-input"></label>
     </div>
 </label>
 <label><span>Maker:</span> <input type="text" id="maker" required class="uppercase-input"></label>
@@ -342,7 +366,7 @@ input, textarea, select { margin: 5pt 0; padding: 10px; border: 1px solid #ccc; 
         
         <div id="modalPasswordSection" style="margin-top: 20px;">
             <label for="modalPasswordInput" style="font-weight: bold; color: #dc3545;">Enter Admin Password to Proceed:</label>
-            <input type="password" id="modalPasswordInput" placeholder="Password" onkeyup="handleModalKey(event)">
+            <input type="password" id="modalPasswordInput" placeholder="Password" onkeyup="handleModalKey(event, document.getElementById('modalOk'))">
             <p id="modalError" style="color: red; display: none; margin-top: 5px;"></p>
         </div>
 
@@ -353,6 +377,36 @@ input, textarea, select { margin: 5pt 0; padding: 10px; border: 1px solid #ccc; 
     </div>
 </div>
 
+<div id="detailedPrintTemplate" style="display:none;">
+    <div class="print-record">
+        <h2 id="print_vehicleName"></h2>
+        <div class="details-container">
+            <div class="info-wrapper">
+                <div class="loan-details-box">
+                    <h3>Loan Details</h3>
+                    <strong>Vehicle Number:</strong> <span id="print_vno"></span><br>
+                    <strong>Name:</strong> <span id="print_name"></span><br> 
+                    <strong>Address:</strong> <span id="print_address"></span><br>
+                    <strong>Phone:</strong> <span id="print_phone"></span><br>
+                    <strong>Guarantor:</strong> <span id="print_guarantor"></span><br>
+                    <strong>Loan AG Number:</strong> <span id="print_loanAg"></span><br>
+                    <strong>Loan Date:</strong> <span id="print_loanDate"></span>
+                </div>
+                <div class="vehicle-details-box">
+                    <h3>Vehicle Details</h3>
+                    <strong>Maker:</strong> <span id="print_maker"></span><br>
+                    <strong>Classification:</strong> <span id="print_classification"></span><br>
+                    <strong>Model:</strong> <span id="print_model"></span><br>
+                    <strong>Driving License:</strong> <span id="print_drivingLicense"></span><br>
+                    <strong>Chassis:</strong> <span id="print_chassis"></span><br>
+                    <strong>Engine:</strong> <span id="print_engine"></span><br>
+                    <strong>RTO:</strong> <span id="print_rto"></span>
+                </div>
+            </div>
+            <div id="print_nocStatus"></div>
+        </div>
+    </div>
+</div>
 <script>
 const { jsPDF } = window.jspdf;
 
@@ -392,6 +446,13 @@ document.addEventListener('DOMContentLoaded', () => {
 function handleLoginKey(event) {
     if (event.key === 'Enter') {
         login();
+    }
+}
+
+// SEARCH ON ENTER KEY
+function handleSearchKey(event) {
+    if (event.key === 'Enter') {
+        searchInVehicleData();
     }
 }
 
@@ -646,7 +707,7 @@ function toggleVehicleDetails(vehicleNumber, clickedRow) {
 function searchInVehicleData() {
     const input = document.getElementById('searchInputData').value.trim().toUpperCase();
     if (!input) { 
-        showMessage('Enter search term for Vehicle No., Name, or Loan AG No.'); 
+        showMessage('Enter search term for Vehicle No., Name, Loan AG No., or NOC.'); 
         renderAllTable(vehicles); // Reset view if input is empty
         return; 
     }
@@ -658,7 +719,9 @@ function searchInVehicleData() {
         `${v.surname} ${v.firstName}`.toUpperCase().includes(input) ||
         `${v.firstName} ${v.surname}`.toUpperCase().includes(input) ||
         // Search by Loan AG Number
-        v.loanAg.toUpperCase().includes(input)
+        v.loanAg.toUpperCase().includes(input) ||
+        // Search by NOC Number (NEW LOGIC)
+        (v.noc && v.noc.toUpperCase().includes(input))
     );
     
     if (filtered.length === 0) {
@@ -678,6 +741,7 @@ function checkIfGuarantor(loanAgToCheck) {
     if (!loanAgToCheck || loanAgToCheck === 'N/A') return null; 
     
     // The guarantor string format is: "SURNAME NAME | LOAN_AG: <LoanAGNumber>"
+    // The Loan AG is now a simple 6-character string.
     const checkString = `LOAN_AG: ${loanAgToCheck.toUpperCase()}`;
 
     // Find the *first* vehicle where the loanAgToCheck is listed as the guarantor
@@ -765,6 +829,7 @@ function showNOCConfirmation(v, conflictingLoanAg) {
         }
     };
     cancelButton.onclick = () => { modal.style.display = 'none'; showMessage('NOC generation cancelled.'); };
+    // Pass the okButton reference to handleModalKey
     passwordInput.onkeyup = (event) => { handleModalKey(event, okButton); };
 
 
@@ -862,11 +927,20 @@ async function generateDirectNOCPDF(vehicleNumber) {
     }
 
     // PDF generation is UNCONDITIONAL once NOC exists (as requested)
-    
-    let rtaLoc = prompt('Enter RTO location (e.g. KAKINADA):', v.rto.toUpperCase() || 'KAKINADA');
-    if (!rtaLoc) rtaLoc = 'KAKINADA';
+    
+    let rtaLoc = prompt('Enter RTO location (e.g. KAKINADA):', v.rto.toUpperCase() || 'KAKINADA');
+    
+    // START OF MODIFIED LOGIC
+    if (rtaLoc === null) { 
+        showMessage('NOC PDF generation cancelled by user.');
+        return;
+    }
+    if (rtaLoc === "") {
+        rtaLoc = 'KAKINADA'; // If the user clicked OK with an empty string, default to KAKINADA
+    }
+    // END OF MODIFIED LOGIC
 
-    await generateNOCPDFCore(v, rtaLoc);
+    await generateNOCPDFCore(v, rtaLoc);
 }
 
 // Core PDF generation function - Increased scale for higher resolution
@@ -967,30 +1041,6 @@ function toggleGuarantorFields(forceHide = false) {
     // Note: Removed required attribute manipulation since the check is now in addVehicle based on content
 }
 
-// Function to determine the next Loan AG sequence
-function getNextLoanSequence() {
-    let maxSequence = 0;
-    const prefixLength = 6; // 'H00001'.length
-    const prefix = 'H';
-    const numDigits = 5; // '00001'.length
-
-    // Find the largest number in the 'H0000X' sequence
-    vehicles.forEach(v => {
-        if (v.loanAg && v.loanAg.startsWith(prefix)) {
-            const sequenceStr = v.loanAg.substring(1, prefixLength);
-            const sequence = parseInt(sequenceStr);
-            if (!isNaN(sequence) && sequence > maxSequence) {
-                maxSequence = sequence;
-            }
-        }
-    });
-
-    const nextSequence = maxSequence + 1;
-    // Pad the number with leading zeros (e.g., 1 -> '00001')
-    const paddedSequence = String(nextSequence).padStart(numDigits, '0');
-    return prefix + paddedSequence; // e.g., 'H00002'
-}
-
 
 async function addVehicle(e) {
     e.preventDefault();
@@ -1021,8 +1071,8 @@ async function addVehicle(e) {
         
         // If the user opened the field AND provided any data, enforce full validation
         if (gSurname || gName || gLoanAg) {
-            if (!gSurname || !gName || gLoanAg.length !== 16) {
-                showMessage('Guarantor Details are incomplete. Please fill all fields or clear them all and close the section.');
+            if (!gSurname || !gName || gLoanAg.length !== 6) { // *** MODIFIED: gLoanAg length check
+                showMessage('Guarantor Details are incomplete or Guarantor Loan AG is not 6 characters. Please fill all fields or clear them all and close the section.');
                 return;
             }
             // Check if the Guarantor's Loan AG exists in the main vehicle list
@@ -1041,18 +1091,14 @@ async function addVehicle(e) {
     const phoneNum = document.getElementById('phone').value.trim();
     if (phoneNum.length !== 10 || !/^\d{10}$/.test(phoneNum)) { showMessage('Mobile number must be exactly 10 digits.'); return; }
     
-    // Loan AG Number Auto-generation/Concatenation
-    const customLoanAgPart = document.getElementById('loanAg').value.trim();
-    if (customLoanAgPart.length !== 10) { showMessage('Loan AG Number (Last 10 Digits) must be exactly 10 digits.'); return; }
-    
-    // Get the next sequential prefix (H0000X)
-    const loanAgPrefix = getNextLoanSequence();
-    const fullLoanAg = loanAgPrefix + customLoanAgPart;
+    // Loan AG Number Logic (MODIFIED: Use input value directly, check length 6)
+    const fullLoanAg = document.getElementById('loanAg').value.trim().toUpperCase();
+    if (fullLoanAg.length !== 6) { showMessage('Loan AG Number must be exactly 6 characters.'); return; }
     
     // **NEW LOGIC: Check if the new customer's Loan AG is a guarantor on any EXISTING loan**
     const conflictingLoanAg = checkIfGuarantor(fullLoanAg);
     if (conflictingLoanAg) {
-        showMessage(`New vehicle entry **BLOCKED**: The generated Loan AG (${fullLoanAg}) is already active as a Guarantor for Loan AG ${conflictingLoanAg}. This indicates a data conflict.`);
+        showMessage(`New vehicle entry **BLOCKED**: The Loan AG (${fullLoanAg}) is already active as a Guarantor for Loan AG ${conflictingLoanAg}. This indicates a data conflict.`);
         return;
     }
     // **END NEW LOGIC**
@@ -1069,7 +1115,7 @@ async function addVehicle(e) {
         phone: phoneNum,
         address: address,
         vehicleNumber: vehicleNum,
-        loanAg: fullLoanAg, // Use the concatenated Loan AG Number
+        loanAg: fullLoanAg, // Use the 6-character Loan AG Number directly
         loanDate: document.getElementById('loanDate').value,
         guarantor: guarantorDetails, // Stores 'N/A' or the full string
         maker: document.getElementById('maker').value.trim(),
@@ -1107,63 +1153,114 @@ async function addVehicle(e) {
     }
 }
 
+// CORRECTED: Print function generates detailed views without altering the main table.
 function printVehicleData() {
-    const tableBody = document.getElementById('allVehicleTable').getElementsByTagName('tbody')[0].innerHTML;
-    let tableHtml = document.getElementById('allVehicleTable').outerHTML;
+    // Only proceed if there are vehicles to print (even filtered data)
+    const dataToPrint = vehicles; 
 
-    // Use a temporary div to manipulate the table content to ensure printout is clean
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = tableHtml;
-    const printTable = tempDiv.querySelector('#allVehicleTable');
-    const rows = printTable.getElementsByTagName('tr');
-
-    // Iterate through data rows (skipping header)
-    for (let i = 1; i < rows.length; i++) {
-        const row = rows[i];
-        const nocCell = row.cells[3]; // NOC column
-        const actionCell = row.cells[4]; // Action column
-
-        // Check for expanded details row and skip it
-        if (row.classList.contains('details-row')) {
-            row.remove();
-            i--; // Decrement counter since a row was removed
-            continue;
-        }
-        
-        // Remove click handler from table rows for printing
-        row.removeAttribute('onclick');
-        row.style.cursor = 'default';
-
-        // --- Print View Improvement Logic ---
-        if (nocCell.textContent.trim() !== 'Not Generated' && nocCell.textContent.trim() !== 'NOC Generated') {
-            // NOC exists and is the actual number
-            actionCell.innerHTML = 'NOC PDF';
-        } else {
-            // NOC is not generated
-            actionCell.innerHTML = 'N/A';
-        }
-        // ------------------------------------
+    if (dataToPrint.length === 0) {
+        showMessage("No vehicle data to print.");
+        return;
     }
-    
-    // Get the vehicle data section content, now with modified table
-    const el = document.getElementById('vehicleData');
-    const contentToPrint = '<h2>' + el.querySelector('h2').textContent + '</h2>' + printTable.outerHTML;
 
-    const printWindow = window.open('', '', 'width=900,height=700');
-    printWindow.document.write('<html><head><title>Print - Vehicle Data</title>');
-    // Add time for the printout header
+    // 1. Prepare the printing container
+    const printTemplateHtml = document.getElementById('detailedPrintTemplate').innerHTML;
+    let allRecordsHtml = '';
     const now = new Date();
     const formattedTime = `${now.getMonth()+1}/${now.getDate()}/${String(now.getFullYear()).slice(2)}, ${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')} ${now.getHours() >= 12 ? 'PM' : 'AM'}`;
+
+    // 2. Iterate through all vehicles and fill the template
+    dataToPrint.forEach(v => {
+        // Create a temporary container for injection
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = printTemplateHtml;
+        const record = tempDiv.querySelector('.print-record');
+
+        // Guarantor check status
+        const conflictingLoanAg = checkIfGuarantor(v.loanAg); 
+        let nocStatusHtml = '';
+
+        if (v.noc) {
+            nocStatusHtml = `<div><strong>Generated NOC:</strong> ${v.noc}</div>`;
+        } else {
+            nocStatusHtml = '<div>NOC not yet generated.</div>';
+        }
+
+        if (conflictingLoanAg) {
+            nocStatusHtml += `<div style="margin-top: 10px; color: #dc3545; font-weight: bold;">
+                &#9888; WARNING: This Loan AG (${v.loanAg}) is a Guarantor for active Loan AG ${conflictingLoanAg}.
+            </div>`;
+        } else {
+            nocStatusHtml += `<div style="margin-top: 10px; color: #28a745;">
+                &#10003; Customer is not a Guarantor for any other active loan.
+            </div>`;
+        }
+        
+        // Populate fields
+        record.querySelector('#print_vehicleName').textContent = `${v.surname} ${v.firstName} - ${v.vehicleNumber} Details`;
+        record.querySelector('#print_vno').textContent = v.vehicleNumber;
+        record.querySelector('#print_name').textContent = `${v.surname} ${v.firstName}`;
+        record.querySelector('#print_address').innerHTML = v.address.replace(/\n/g, '<br>');
+        record.querySelector('#print_phone').textContent = v.phone;
+        record.querySelector('#print_guarantor').textContent = v.guarantor;
+        record.querySelector('#print_loanAg').textContent = v.loanAg;
+        record.querySelector('#print_loanDate').textContent = v.loanDate;
+        record.querySelector('#print_maker').textContent = v.maker;
+        record.querySelector('#print_classification').textContent = v.classification;
+        record.querySelector('#print_model').textContent = v.model;
+        record.querySelector('#print_drivingLicense').textContent = v.drivingLicense;
+        record.querySelector('#print_chassis').textContent = v.chassis;
+        record.querySelector('#print_engine').textContent = v.engine;
+        record.querySelector('#print_rto').textContent = v.rto;
+        record.querySelector('#print_nocStatus').innerHTML = nocStatusHtml;
+
+        allRecordsHtml += record.outerHTML;
+    });
+
+    // 3. Open a new window and print
+    const printWindow = window.open('', '', 'width=900,height=700');
+    printWindow.document.write('<html><head><title>Print - Detailed Vehicle Data</title>');
     
-    printWindow.document.write('<style>body{font-family:Arial, sans-serif; padding:20px;} table{border-collapse:collapse;width:100%;} th,td{border:1px solid #ddd;padding:8px;text-align:left;} th{background:#f4f4f4;} .section-header, .search-inline, .print-btn {display:none;}</style>');
+    // Add necessary styles for printing the detailed view
+    printWindow.document.write('<style>');
+    printWindow.document.write(`
+        body { font-family: 'Inter', Arial, sans-serif; padding: 20px; color: #333; }
+        .print-record {
+            padding: 20px;
+            background-color: #f0f8ff; 
+            border: 1px solid #cceeff; 
+            border-radius: 10px; 
+            margin-bottom: 20px;
+            page-break-after: always; /* Force new page for each record */
+        }
+        .print-record:last-child { page-break-after: auto; }
+        .print-record h2 { font-size: 1.5em; margin-bottom: 15px; border-bottom: 2px solid #ddd; padding-bottom: 5px; color: #0d6efd; }
+        .print-record .info-wrapper { display: flex; flex-wrap: wrap; gap: 20px; }
+        .print-record .loan-details-box, .print-record .vehicle-details-box {
+            border: 1px solid #b3d9ff; padding: 15px; background: #ffffff; flex: 1 1 300px; border-radius: 8px;
+        }
+        .print-record .loan-details-box h3, .print-record .vehicle-details-box h3 {
+            margin-top: 0; color: #0d6efd; font-size: 1.2em; border-bottom: 1px dashed #ddd; padding-bottom: 10px; margin-bottom: 10px;
+        }
+        .print-record strong { font-weight: bold; }
+        .print-record .details-container { display: flex; flex-direction: column; gap: 15px; }
+        /* Print media specific styles */
+        @media print {
+            .print-record { box-shadow: none; border: 1px solid #ccc; background-color: #fff; }
+            .print-record .loan-details-box, .print-record .vehicle-details-box { border: 1px solid #eee; }
+        }
+    `);
+    printWindow.document.write('</style>');
     printWindow.document.write('</head><body>');
-    printWindow.document.write(`<div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 10px;"><span>${formattedTime}</span><span>Print - Vehicle Data</span></div>`);
-    printWindow.document.write(contentToPrint);
+    printWindow.document.write(`<h1 style="text-align:center;">Sri Lakshmi Ganesh Auto Finance - Detailed Vehicle Records</h1>`);
+    printWindow.document.write(`<p style="text-align:right; font-size:12px;">Printed on: ${formattedTime}</p>`);
+    printWindow.document.write(allRecordsHtml);
     printWindow.document.write('</body></html>');
     printWindow.document.close();
     printWindow.focus();
     setTimeout(() => { printWindow.print(); printWindow.close(); }, 500);
 }
+
 
 function deleteWithPassword() {
     if (userRole !== 'admin') { showMessage('Access denied. Admin rights required.'); return; }

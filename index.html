@@ -260,175 +260,78 @@ input, textarea, select { margin: 5pt 0; padding: 10px; border: 1px solid #ccc; 
 </form>
 </div>
 
-<!-- NOC TEMPLATE ONLY CHANGED -->
 <div id="nocTemplateWrapper" aria-hidden="true">
-    <div id="nocTemplate" style="
-        width: 8.27in;
-        height: 11.69in;
-        padding: 0.8in 0.85in 0.65in 0.85in;
-        box-sizing: border-box;
-        background: #ffffff;
-        color: #000;
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 12pt;
-        line-height: 1.4;
-        position: relative;
-    ">
+    <div id="nocTemplate" style="width: 8.5in; height: 11in; padding: 0.75in 1in; box-sizing: border-box; background: white; color: #000; font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.4;">
+        
 
-        <!-- Top maroon band -->
-        <div style="position:absolute; left:0; top:0; width:100%; height:18pt; background:#7b3032;"></div>
 
-        <!-- Header: logo + company name -->
-        <div style="margin-top:0.45in; display:flex; align-items:center;">
-            <!-- Use your exact logo image here -->
-            <div style="width:95px; height:95px; margin-right:0.35in; display:flex; align-items:center; justify-content:center;">
-                <!-- Place a PNG/JPG named slg_logo.png next to this HTML file -->
-                <img src="slg_logo.png" alt="SLG Auto Finance Logo" style="max-width:95px; max-height:95px; display:block;">
-            </div>
-
-            <div style="flex:1;">
-                <div style="font-size:18pt; font-weight:bold; letter-spacing:1px; color:#000;">
-                    SRI LAKSHMI GANESH
-                </div>
-                <div style="margin-top:2pt; font-size:13pt; letter-spacing:6px; font-weight:bold; color:#006699;">
-                    AUTO&nbsp;F I N A N C E
-                </div>
-            </div>
-        </div>
-
-        <!-- Title -->
-        <div style="margin-top:0.65in; text-align:center; font-size:14pt; font-weight:bold; text-decoration:underline;">
+        <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-top: 0.5in; margin-bottom: 0.4in;">
             NO OBJECTION CERTIFICATE
         </div>
 
-        <!-- Ref. No / Date -->
-        <div style="margin-top:0.35in; display:flex; justify-content:space-between; font-size:11.5pt;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.3in;">
             <div>
-                <span style="font-weight:bold;">Ref. No:</span>
-                <span id="noc_number" style="display:inline-block; min-width:150pt; margin-left:4pt;"></span>
+                <strong>Ref. No:</strong> <span id="noc_number"></span>
             </div>
-            <div style="text-align:right;">
-                <span style="font-weight:bold;">Date:</span>
-                <span id="noc_date" style="display:inline-block; min-width:120pt; margin-left:4pt;"></span>
+            <div>
+                <strong>Date:</strong> <span id="noc_date"></span>
             </div>
         </div>
 
-        <!-- To block -->
-        <div style="margin-top:0.25in;">
-            <div style="font-weight:bold;">To,</div>
-            <div style="margin-top:3pt;">The Regional Transport Authority,</div>
-            <div style="margin-top:3pt;">
-                R.T.O. <span id="rta_location" style="margin-left:4pt;"></span>
-            </div>
+        <div style="margin-bottom: 0.3in; line-height: 1.2;">
+            <div><strong>To,</strong></div>
+            <div>The Regional Transport Authority,</div>
+            <div>R.T.O. <span id="rta_location"></span></div>
         </div>
 
-        <!-- Subject -->
-        <div style="margin-top:0.25in;">
-            <span style="font-weight:bold;">Subject:</span>
-            <span> No Objection Certificate for Termination of Hypothecation.</span>
+        <div style="margin-bottom: 0.3in;">
+            <strong>Subject:</strong> No Objection Certificate for Termination of Hypothecation.
         </div>
 
-        <!-- Body -->
-        <div style="margin-top:0.28in; text-align:justify;">
-            We hereby confirm that the agreement entered between
-            <span style="font-weight:bold;">SRI LAKSHMI GANESH AUTO FINANCE</span>
-            and the below-mentioned borrower has been fully settled. Therefore, we have no objection
-            to the termination of hypothecation on the said vehicle.
+        <div style="text-align: justify; margin-bottom: 0.3in; line-height: 1.6;">
+            We hereby confirm that the agreement entered between <strong>SRI LAKSHMI GANESH AUTO FINANCE</strong> and the below-mentioned borrower has been fully settled. Therefore, we have no objection to the termination of hypothecation on the said vehicle.
         </div>
 
-        <!-- Borrower Name & Address -->
-        <div style="margin-top:0.35in; font-weight:bold;">
-            Borrower Name &amp; Address:
+        <div style="margin-bottom: 0.3in;">
+            <div style="font-weight: bold; margin-bottom: 4pt;">BORROWER NAME & ADDRESS:</div>
+            <div id="noc_customer_address" style="line-height: 1.4; margin-left: 0.2in;"></div>
         </div>
-        <div id="noc_customer_address" style="margin-top:0.12in; min-height:0.8in;"></div>
 
-        <!-- Vehicle details grid -->
-        <table style="width:100%; margin-top:0.35in; border-collapse:collapse; font-size:11.5pt;">
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 0.3in;">
             <tr>
-                <td style="padding:2pt 0; font-weight:bold; width:25%;">Vehicle No.:</td>
-                <td style="padding:2pt 0; width:25%;"><span id="noc_vno"></span></td>
-                <td style="padding:2pt 0; font-weight:bold; width:25%;">Loan Date:</td>
-                <td style="padding:2pt 0; width:25%;"><span id="noc_loanDate"></span></td>
+                <td style="padding: 6pt 0; border: none; width: 50%;"><strong>VEHICLE No.:</strong> <span id="noc_vno"></span></td>
+                <td style="padding: 6pt 0; border: none;"><strong>LOAN DATE:</strong> <span id="noc_loanDate"></span></td>
             </tr>
             <tr>
-                <td style="padding:2pt 0; font-weight:bold;">Engine No.:</td>
-                <td style="padding:2pt 0;"><span id="noc_engine"></span></td>
-                <td style="padding:2pt 0; font-weight:bold;">Loan A/c No.:</td>
-                <td style="padding:2pt 0;"><span id="noc_loanag"></span></td>
+                <td style="padding: 6pt 0; border: none;"><strong>ENGINE No.:</strong> <span id="noc_engine"></span></td>
+                <td style="padding: 6pt 0; border: none;"><strong>LOAN A/C No.:</strong> <span id="noc_loanag"></span></td>
             </tr>
             <tr>
-                <td style="padding:2pt 0; font-weight:bold;">Chassis No.:</td>
-                <td style="padding:2pt 0;"><span id="noc_chassis"></span></td>
-                <td style="padding:2pt 0; font-weight:bold;">Maker’s:</td>
-                <td style="padding:2pt 0;"><span id="noc_maker"></span></td>
+                <td style="padding: 6pt 0; border: none;"><strong>CHASSIS No.:</strong> <span id="noc_chassis"></span></td>
+                <td style="padding: 6pt 0; border: none;"><strong>MAKER'S:</strong> <span id="noc_maker"></span></td>
             </tr>
             <tr>
-                <td style="padding:2pt 0; font-weight:bold;">Classification:</td>
-                <td style="padding:2pt 0;"><span id="noc_class"></span></td>
-                <td style="padding:2pt 0; font-weight:bold;">Model:</td>
-                <td style="padding:2pt 0;"><span id="noc_model"></span></td>
+                <td style="padding: 6pt 0; border: none;"><strong>CLASSIFICATION:</strong> <span id="noc_class"></span></td>
+                <td style="padding: 6pt 0; border: none;"><strong>MODEL:</strong> <span id="noc_model"></span></td>
             </tr>
         </table>
 
-        <!-- Note -->
-        <div style="margin-top:0.45in; font-size:11pt;">
-            <span style="font-weight:bold;">Note:</span>
-            <span> This No Objection Certificate is valid only for three (3) months from the date of issue.</span>
+        <div style="margin-bottom: 0.2in;">
+            <strong>Note:</strong> This No Objection Certificate is valid only for three (3) months from the date of issue.
         </div>
-
-        <!-- Signature -->
-        <div style="margin-top:0.6in; text-align:right; font-size:11.5pt;">
+        <div style="text-align: right; margin-top: 0.5in;">
             <div>Thanking You,</div>
-            <div style="margin-top:8pt; font-weight:bold;">For SRI LAKSHMI GANESH AUTO FINANCE</div>
+            <div style="font-weight: bold; margin-top: 15pt; margin-bottom: 1pt;">For SRI LAKSHMI GANESH AUTO FINANCE</div>
+        </div>
+	<div style="text-align: right; margin-top: 0.1in;">
+            <div>(Managing Partner),</div>
+        </div>
+	<div style="margin-bottom: 0.3in;">
+            <strong>Attachments:</strong> FORM 35
         </div>
 
-        <div style="margin-top:0.4in; text-align:center; font-size:11pt;">
-            (Managing partner)
-        </div>
-
-        <!-- Bottom vehicles strip -->
-        <div style="
-            position:absolute;
-            left:0;
-            right:0;
-            bottom:18pt;
-            height:36px;
-            display:flex;
-            justify-content:center;
-            align-items:flex-end;
-            gap:20px;
-        ">
-            <!-- Small car -->
-            <div style="width:42px; height:18px; background:#8f8f8f; border-radius:4px 4px 2px 2px; position:relative;">
-                <div style="position:absolute; top:-9px; left:4px; width:18px; height:9px; background:#8f8f8f; border-radius:3px 3px 0 0;"></div>
-                <div style="position:absolute; bottom:-6px; left:5px; width:10px; height:10px; border-radius:50%; background:#555;"></div>
-                <div style="position:absolute; bottom:-6px; right:5px; width:10px; height:10px; border-radius:50%; background:#555;"></div>
-            </div>
-            <!-- Van -->
-            <div style="width:55px; height:20px; background:#8f8f8f; border-radius:3px 3px 2px 2px; position:relative;">
-                <div style="position:absolute; top:-11px; left:5px; width:26px; height:11px; background:#8f8f8f; border-radius:3px 3px 0 0;"></div>
-                <div style="position:absolute; bottom:-6px; left:6px; width:10px; height:10px; border-radius:50%; background:#555;"></div>
-                <div style="position:absolute; bottom:-6px; right:6px; width:10px; height:10px; border-radius:50%; background:#555;"></div>
-            </div>
-            <!-- Tractor -->
-            <div style="width:46px; height:18px; background:#8f8f8f; border-radius:2px 2px 0 0; position:relative;">
-                <div style="position:absolute; top:-10px; left:10px; width:14px; height:10px; background:#8f8f8f; border-radius:2px 2px 0 0;"></div>
-                <div style="position:absolute; bottom:-7px; left:3px; width:12px; height:12px; border-radius:50%; background:#555;"></div>
-                <div style="position:absolute; bottom:-7px; right:4px; width:10px; height:10px; border-radius:50%; background:#555;"></div>
-            </div>
-            <!-- Truck -->
-            <div style="width:60px; height:20px; background:#8f8f8f; border-radius:2px 2px 0 0; position:relative;">
-                <div style="position:absolute; top:-11px; left:3px; width:26px; height:11px; background:#8f8f8f; border-radius:2px 2px 0 0;"></div>
-                <div style="position:absolute; bottom:-6px; left:6px; width:10px; height:10px; border-radius:50%; background:#555;"></div>
-                <div style="position:absolute; bottom:-6px; right:6px; width:10px; height:10px; border-radius:50%; background:#555;"></div>
-            </div>
-        </div>
-
-        <!-- Bottom maroon band -->
-        <div style="position:absolute; left:0; bottom:0; width:100%; height:18pt; background:#7b3032;"></div>
     </div>
 </div>
-<!-- END NOC TEMPLATE -->
 
 <div id="nocConfirmationModal">
     <div class="modal-content">
@@ -506,10 +409,10 @@ function autoCapitalizeInput(e) {
     input.value = input.value.toUpperCase();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.uppercase-input').forEach(input => {
-        input.addEventListener('input', autoCapitalizeInput);
-    });
+document.addEventListener('input', (e) => {
+    if (e.target.classList.contains('uppercase-input')) {
+        autoCapitalizeInput(e);
+    }
 });
 
 
@@ -997,15 +900,19 @@ async function generateDirectNOCPDF(vehicleNumber) {
         return; 
     }
 
+    // PDF generation is UNCONDITIONAL once NOC exists (as requested)
+    
     let rtaLoc = prompt('Enter RTO location (e.g. KAKINADA):', v.rto.toUpperCase() || 'KAKINADA');
     
+    // START OF MODIFIED LOGIC
     if (rtaLoc === null) { 
         showMessage('NOC PDF generation cancelled by user.');
         return;
     }
     if (rtaLoc === "") {
-        rtaLoc = 'KAKINADA';
+        rtaLoc = 'KAKINADA'; // If the user clicked OK with an empty string, default to KAKINADA
     }
+    // END OF MODIFIED LOGIC
 
     await generateNOCPDFCore(v, rtaLoc);
 }
@@ -1043,7 +950,7 @@ async function generateNOCPDFCore(v, rtaLoc) {
     template.style.display = 'block';
 
     const canvas = await html2canvas(template, { 
-        scale: 3,
+        scale: 3, // Increased scale for better resolution (as requested)
         useCORS: true, 
         backgroundColor: '#ffffff' 
     });
@@ -1105,7 +1012,6 @@ function toggleGuarantorFields(forceHide = false) {
     } else {
         guarantorFields.style.display = (guarantorFields.style.display === 'none' || guarantorFields.style.display === '') ? 'block' : 'none';
     }
-    // Note: Removed required attribute manipulation since the check is now in addVehicle based on content
 }
 
 
@@ -1136,16 +1042,15 @@ async function addVehicle(e) {
         const gName = document.getElementById('guarantorName').value.trim();
         const gLoanAg = document.getElementById('guarantorLoanAg').value.trim().toUpperCase(); 
         
-        // If the user opened the field AND provided any data, enforce full validation
+        // If the user provided any data, enforce full validation
         if (gSurname || gName || gLoanAg) {
-            if (!gSurname || !gName || gLoanAg.length !== 6) { // *** MODIFIED: gLoanAg length check
-                showMessage('Guarantor Details are incomplete or Guarantor Loan AG is not 6 characters. Please fill all fields or clear them all and close the section.');
+            if (!gSurname || !gName || gLoanAg.length !== 6) {
+                showMessage('Guarantor Details are incomplete or Guarantor Loan AG is not 6 characters.');
                 return;
             }
-            // Check if the Guarantor's Loan AG exists in the main vehicle list
             const guarantorVehicle = vehicles.find(v => v.loanAg === gLoanAg);
             if (!guarantorVehicle) {
-                showMessage(`Guarantor Loan AG Number (${gLoanAg}) must match an existing Loan AG in the system.`);
+                showMessage(`Guarantor Loan AG Number (${gLoanAg}) must match an existing Loan AG.`);
                 return;
             }
             guarantorDetails = `${gSurname} ${gName} | LOAN_AG: ${gLoanAg}`;
@@ -1158,20 +1063,17 @@ async function addVehicle(e) {
     const phoneNum = document.getElementById('phone').value.trim();
     if (phoneNum.length !== 10 || !/^\d{10}$/.test(phoneNum)) { showMessage('Mobile number must be exactly 10 digits.'); return; }
     
-    // Loan AG Number Logic (MODIFIED: Use input value directly, check length 6)
     const fullLoanAg = document.getElementById('loanAg').value.trim().toUpperCase();
     if (fullLoanAg.length !== 6) { showMessage('Loan AG Number must be exactly 6 characters.'); return; }
     
-    // **NEW LOGIC: Check if the new customer's Loan AG is a guarantor on any EXISTING loan**
     const conflictingLoanAg = checkIfGuarantor(fullLoanAg);
     if (conflictingLoanAg) {
-        showMessage(`New vehicle entry **BLOCKED**: The Loan AG (${fullLoanAg}) is already active as a Guarantor for Loan AG ${conflictingLoanAg}. This indicates a data conflict.`);
+        showMessage(`New vehicle entry **BLOCKED**: The Loan AG (${fullLoanAg}) is already a Guarantor for Loan AG ${conflictingLoanAg}.`);
         return;
     }
-    // **END NEW LOGIC**
     
     const address = 
-        `H.No: ${document.getElementById('hNo').value.trim()}\n` +
+        `H.No: ${document.getElementById('hNo').value.trim()}\n` + 
         `${document.getElementById('addressLine').value.trim()}\n` +
         `${document.getElementById('city').value.trim()} - ${document.getElementById('pinCode').value.trim()}\n` +
         `${document.getElementById('state').value.trim()}`;
@@ -1182,9 +1084,9 @@ async function addVehicle(e) {
         phone: phoneNum,
         address: address,
         vehicleNumber: vehicleNum,
-        loanAg: fullLoanAg, // Use the 6-character Loan AG Number directly
+        loanAg: fullLoanAg,
         loanDate: document.getElementById('loanDate').value,
-        guarantor: guarantorDetails, // Stores 'N/A' or the full string
+        guarantor: guarantorDetails,
         maker: document.getElementById('maker').value.trim(),
         classification: document.getElementById('classification').value.trim(),
         model: document.getElementById('model').value.trim(),
@@ -1216,13 +1118,12 @@ async function addVehicle(e) {
         goHome();
     } catch (error) {
         console.error('Error adding vehicle:', error);
-        showMessage('Failed to add vehicle. Check server connection or input data.');
+        showMessage('Failed to add vehicle. Check server connection.');
     }
 }
 
 // CORRECTED: Print function generates detailed views without altering the main table.
 function printVehicleData() {
-    // Only proceed if there are vehicles to print (even filtered data)
     const dataToPrint = vehicles; 
 
     if (dataToPrint.length === 0) {
@@ -1230,20 +1131,16 @@ function printVehicleData() {
         return;
     }
 
-    // 1. Prepare the printing container
     const printTemplateHtml = document.getElementById('detailedPrintTemplate').innerHTML;
     let allRecordsHtml = '';
     const now = new Date();
     const formattedTime = `${now.getMonth()+1}/${now.getDate()}/${String(now.getFullYear()).slice(2)}, ${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')} ${now.getHours() >= 12 ? 'PM' : 'AM'}`;
 
-    // 2. Iterate through all vehicles and fill the template
     dataToPrint.forEach(v => {
-        // Create a temporary container for injection
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = printTemplateHtml;
         const record = tempDiv.querySelector('.print-record');
 
-        // Guarantor check status
         const conflictingLoanAg = checkIfGuarantor(v.loanAg); 
         let nocStatusHtml = '';
 
@@ -1263,7 +1160,6 @@ function printVehicleData() {
             </div>`;
         }
         
-        // Populate fields
         record.querySelector('#print_vehicleName').textContent = `${v.surname} ${v.firstName} - ${v.vehicleNumber} Details`;
         record.querySelector('#print_vno').textContent = v.vehicleNumber;
         record.querySelector('#print_name').textContent = `${v.surname} ${v.firstName}`;
@@ -1284,11 +1180,9 @@ function printVehicleData() {
         allRecordsHtml += record.outerHTML;
     });
 
-    // 3. Open a new window and print
     const printWindow = window.open('', '', 'width=900,height=700');
     printWindow.document.write('<html><head><title>Print - Detailed Vehicle Data</title>');
     
-    // Add necessary styles for printing the detailed view
     printWindow.document.write('<style>');
     printWindow.document.write(`
         body { font-family: 'Inter', Arial, sans-serif; padding: 20px; color: #333; }
@@ -1298,7 +1192,7 @@ function printVehicleData() {
             border: 1px solid #cceeff; 
             border-radius: 10px; 
             margin-bottom: 20px;
-            page-break-after: always; /* Force new page for each record */
+            page-break-after: always; 
         }
         .print-record:last-child { page-break-after: auto; }
         .print-record h2 { font-size: 1.5em; margin-bottom: 15px; border-bottom: 2px solid #ddd; padding-bottom: 5px; color: #0d6efd; }
@@ -1342,7 +1236,7 @@ async function deleteVehicle(vehicleNumber) {
         const v = vehicles.find(x => x.vehicleNumber === vehicleNumber);
         const conflictingLoanAg = v ? checkIfGuarantor(v.loanAg) : null;
         if (v && conflictingLoanAg) {
-            showMessage(`Deletion **BLOCKED**: This customer's Loan AG (${v.loanAg}) is still active as a Guarantor for Loan AG ${conflictingLoanAg}.`);
+            showMessage(`Deletion **BLOCKED**: This customer's Loan AG (${v.loanAg}) is active as a Guarantor.`);
             return;
         }
 

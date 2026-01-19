@@ -13,6 +13,7 @@
 body { font-family: 'Inter', Arial, sans-serif; margin: 20px; background-color: #f7f9fc; color: #333; }
 h1 { color: #0d6efd; border-bottom: 2px solid #e0e0e0; padding-bottom: 10px; margin-bottom: 15px; }
 
+/* Modified Headings (Bold) */
 h1, h2, h3 { font-weight: bold; } 
 
 .menu button { margin: 10px; padding: 12px 25px; font-size: 16px; cursor: pointer; background: #0d6efd; color: white; border: none; border-radius: 8px; transition: background-color 0.2s, transform 0.1s; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
@@ -22,7 +23,6 @@ h1, h2, h3 { font-weight: bold; }
 table { border-collapse: collapse; width: 100%; margin-top: 20px; border-radius: 8px; overflow: hidden; table-layout: fixed; } 
 th, td { border: 1px solid #ddd; padding: 12px; text-align: left; vertical-align: middle; font-size: 14px; }
 th { background-color: #f4f4f4; color: #333; font-weight: 600; }
-
 #allVehicleTable tbody tr:hover { background-color: inherit; } 
 
 input, textarea, select { margin: 5pt 0; padding: 10px; border: 1px solid #ccc; border-radius: 5px; width: 100%; box-sizing: border-box; }
@@ -54,7 +54,7 @@ input, textarea, select { margin: 5pt 0; padding: 10px; border: 1px solid #ccc; 
     border: 1px solid #cceeff; 
     border-radius: 10px; 
     margin-bottom: 20px;
-    page-break-after: always; 
+    page-break-after: always;
 }
 .print-record h2 { font-size: 1.5em; margin-bottom: 15px; border-bottom: 2px solid #ddd; padding-bottom: 5px; color: #0d6efd;}
 .print-record .info-wrapper { display: flex; flex-wrap: wrap; gap: 20px;}
@@ -67,6 +67,7 @@ input, textarea, select { margin: 5pt 0; padding: 10px; border: 1px solid #ccc; 
 }
 .print-record strong { font-weight: bold; }
 .print-record .details-container { display: flex; flex-direction: column; gap: 15px; }
+
 
 @media (max-width: 768px) {.form-grid { grid-template-columns: 1fr; } .details-container .info-wrapper { flex-direction: column; } .loan-details-box, .vehicle-details-box { flex: 1 1 auto; } .section { margin: 10px; padding: 15px; } h1 { font-size: 1.5em; } .menu button { margin: 5px; padding: 10px 15px; font-size: 14px; } th, td { padding: 8px; font-size: 12px; }}
 .section-header { display:flex; justify-content:space-between; align-items:center; gap:12px; }
@@ -134,10 +135,31 @@ input, textarea, select { margin: 5pt 0; padding: 10px; border: 1px solid #ccc; 
     min-width: 100px;
 }
 
-#modalOk { background-color: #28a745; color: white; }
-#modalCancel { background-color: #dc3545; color: white; }
-#modalMessage { font-size: 1.1em; line-height: 1.4; color: #333; margin-bottom: 20px; }
-#modalPasswordInput { padding: 10px; margin-top: 15px; width: 80%; border: 1px solid #ccc; border-radius: 5px; text-align: center; }
+#modalOk {
+    background-color: #28a745;
+    color: white;
+}
+
+#modalCancel {
+    background-color: #dc3545;
+    color: white;
+}
+
+#modalMessage {
+    font-size: 1.1em;
+    line-height: 1.4;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#modalPasswordInput {
+    padding: 10px;
+    margin-top: 15px;
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
 
 </style>
 </head>
@@ -232,26 +254,40 @@ input, textarea, select { margin: 5pt 0; padding: 10px; border: 1px solid #ccc; 
 
 <div id="nocTemplateWrapper" aria-hidden="true">
     <div id="nocTemplate" style="width: 8.5in; height: 12.5in; padding: 0.75in 1in; box-sizing: border-box; background: white; color: #000; font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.4;">
+        
         <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-top: 0.7in; margin-bottom: 0.1in;color: blue;">
             NO OBJECTION CERTIFICATE
         </div>
+
         <div style="display: flex; justify-content: space-between; margin-bottom: 0.1in;">
-            <div><strong>Ref. No:</strong> <span id="noc_number"></span></div>
-            <div><strong>Date:</strong> <span id="noc_date"></span></div>
+            <div>
+                <strong>Ref. No:</strong> <span id="noc_number"></span>
+            </div>
+            <div>
+                <strong>Date:</strong> <span id="noc_date"></span>
+            </div>
         </div>
+
         <div style="margin-bottom: 0.2in; line-height: 1.2;">
             <div><strong>To,</strong></div>
             <div>The Regional Transport Authority,</div>
             <div>R.T.O. <span id="rta_location"></span></div>
         </div>
-        <div style="margin-bottom: 0.3in;"><strong>Subject:</strong> No Objection Certificate for Termination of Hypothecation.</div>
+
+        <div style="margin-bottom: 0.3in;">
+            <strong>Subject:</strong> No Objection Certificate for Termination of Hypothecation.
+        </div>
+
         <div style="text-align: justify; margin-bottom: 0.2in; line-height: 1.6;">
             We hereby confirm that the agreement entered between <strong>SRI LAKSHMI GANESH AUTO FINANCE</strong> and the below-mentioned borrower has been fully settled. Therefore, we have no objection to the termination of hypothecation on the said vehicle.
         </div>
+
         <div style="margin-bottom: 0.2in;border: 0.5px solid #333;padding: 12px;border-radius: 4px;background-color: #f4f9ff;">
             <div style=" margin-bottom: 4pt;">BORROWER NAME & ADDRESS:</div>
             <div id="noc_customer_address" style="line-height: 1.4; margin-left: 0.2in;"></div>
+            <div id="noc_customer_phone" style="line-height: 1.4; margin-left: 0.2in; margin-top: 5px;"></div>
         </div>
+
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 0.1in;border: 0.5px solid #333;padding: 15px;border-radius: 1px;background-color: #f4f9ff;">
             <tr>
                 <td style="padding: 6pt 0; padding-left:20px; border: none; width: 50%;"><span style="font-size: 140%;">V</span>EHICLE No.: <span id="noc_vno"></span></td>
@@ -270,13 +306,20 @@ input, textarea, select { margin: 5pt 0; padding: 10px; border: 1px solid #ccc; 
                 <td style="padding: 6pt 0; padding-left:20px; border: none;"><span style="font-size: 140%;">M</span>ODEL: <span id="noc_model"></span></td>
             </tr>
         </table>
-        <div style="margin-bottom: 0.2in;"><strong>Note:</strong> This No Objection Certificate is valid only for <strong>three (3) months</strong> from the date of issue.</div>
+
+        <div style="margin-bottom: 0.2in;">
+            <strong>Note:</strong> This No Objection Certificate is valid only for <strong>three (3) months</strong> from the date of issue.
+        </div>
         <div style="text-align: right; margin-top: 0.1in;">
             <div><strong>Thanking You,</strong></div>
             <div style="font-weight: bold; margin-top: 4pt; margin-bottom: 1pt;color: blue">For SRI LAKSHMI GANESH AUTO FINANCE</div>
         </div>
-        <div style="text-align: right; margin-top: 0.2in;"><div><strong>(Managing Partner)</strong></div></div>
-        <div style="margin-bottom: 0.1in;"><strong>Attachments:</strong> FORM 35</div>
+        <div style="text-align: right; margin-top: 0.2in;">
+            <div><strong>(Managing Partner)</strong></div>
+        </div>
+        <div style="margin-bottom: 0.1in;">
+            <strong>Attachments:</strong> FORM 35
+        </div>
     </div>
 </div>
 
@@ -325,9 +368,10 @@ input, textarea, select { margin: 5pt 0; padding: 10px; border: 1px solid #ccc; 
         </div>
     </div>
 </div>
-
 <script>
 const { jsPDF } = window.jspdf;
+
+// CONFIGURATION
 const API_BASE_URL = 'https://auto-finance-api.onrender.com/api/vehicles';
 const ADMIN_PASSWORD = 'Vehicle@2005';
 const USER_PASSWORD = 'User#08';
@@ -335,9 +379,11 @@ const USER_PASSWORD = 'User#08';
 let vehicles = [];
 let currentExpandedRow = null;
 let userRole = null;
-let currentVehicleToNOC = null;
+let currentVehicleToNOC = null; 
 
+// Utility Functions
 function showMessage(msg) {
+    console.log(msg);
     const notification = document.createElement('div');
     notification.style.cssText = `position: fixed; top: 20px; right: 20px; background-color: #0d6efd; color: white; padding: 10px 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); z-index: 1000;`;
     notification.textContent = msg;
@@ -345,31 +391,64 @@ function showMessage(msg) {
     setTimeout(() => { document.body.removeChild(notification); }, 3000);
 }
 
-function autoCapitalizeInput(e) { e.target.value = e.target.value.toUpperCase(); }
-document.addEventListener('input', (e) => { if (e.target.classList.contains('uppercase-input')) autoCapitalizeInput(e); });
+function autoCapitalizeInput(e) {
+    const input = e.target;
+    input.value = input.value.toUpperCase();
+}
 
-function handleLoginKey(event) { if (event.key === 'Enter') login(); }
-function handleSearchKey(event) { if (event.key === 'Enter') searchInVehicleData(); }
+document.addEventListener('input', (e) => {
+    if (e.target.classList.contains('uppercase-input')) {
+        autoCapitalizeInput(e);
+    }
+});
+
+
+// LOGIN
+function handleLoginKey(event) {
+    if (event.key === 'Enter') {
+        login();
+    }
+}
+
+// SEARCH ON ENTER KEY
+function handleSearchKey(event) {
+    if (event.key === 'Enter') {
+        searchInVehicleData();
+    }
+}
 
 function login() {
     const role = document.getElementById('roleInput').value;
     const password = document.getElementById('passwordInput').value.trim();
+
     if (role === 'admin' && password === ADMIN_PASSWORD) {
-        userRole = 'admin'; setupMenu('admin');
+        userRole = 'admin';
+        setupMenu('admin');
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('home').style.display = 'block';
+        showMessage('Admin Login Successful!');
     } else if (role === 'user' && password === USER_PASSWORD) {
-        userRole = 'user'; setupMenu('user');
+        userRole = 'user';
+        setupMenu('user');
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('home').style.display = 'block';
-    } else { showMessage('Invalid Role or Password.'); }
+        showMessage('User Login Successful!');
+    } else {
+        showMessage('Invalid Role or Password.');
+    }
 }
 
 function setupMenu(role) {
     const menuDiv = document.getElementById('home');
-    menuDiv.innerHTML = '<button onclick="showSection(\'addVehicle\')">Add New Vehicle</button>';
+    menuDiv.innerHTML = '';
+    
+    menuDiv.innerHTML += '<button onclick="showSection(\'addVehicle\')">Add New Vehicle</button>';
     menuDiv.innerHTML += '<button onclick="showSection(\'vehicleData\')">Vehicle Data</button>';
-    if (role === 'admin') menuDiv.innerHTML += '<button onclick="deleteWithPassword()">❌ Delete Vehicle (Admin)</button>';
+
+    if (role === 'admin') {
+        menuDiv.innerHTML += '<button onclick="deleteWithPassword()">❌ Delete Vehicle (Admin)</button>';
+    }
+    
     menuDiv.innerHTML += '<button onclick="logout()">🚪 Logout</button>';
 }
 
@@ -380,6 +459,7 @@ function logout() {
     document.getElementById('home').style.display = 'none';
     document.querySelector('.home-btn').style.display = 'none';
     document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+    showMessage('Logged out.');
 }
 
 function showSection(id) {
@@ -387,7 +467,9 @@ function showSection(id) {
     document.getElementById('home').style.display = 'none';
     document.querySelector('.home-btn').style.display = 'inline-block';
     document.getElementById(id).style.display = 'block';
+
     currentExpandedRow = null;
+
     if (id === 'vehicleData') fetchAndRenderAllData();
 }
 
@@ -395,201 +477,599 @@ function goHome() {
     document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
     document.getElementById('home').style.display = 'block';
     document.querySelector('.home-btn').style.display = 'none';
-    toggleAddressFields(true);
-    toggleGuarantorFields(true);
+    
+    if (document.getElementById('addressFields').style.display !== 'none') {
+        toggleAddressFields(true); 
+    }
+    if (document.getElementById('guarantorFields').style.display !== 'none') {
+        toggleGuarantorFields(true); 
+    }
 }
 
 async function fetchAndRenderAllData() {
     try {
         const response = await fetch(API_BASE_URL);
+        if (!response.ok) throw new Error('Failed to fetch data from server.');
         vehicles = await response.json();
         renderAllTable(vehicles);
-    } catch (error) { showMessage('Could not load data.'); }
+    } catch (error) {
+        console.error('Error loading data:', error);
+        showMessage('Could not load data. Check if Node.js server is running.');
+    }
 }
 
 function renderAllTable(list) {
     const tbody = document.querySelector('#allVehicleTable tbody');
     tbody.innerHTML = '';
-    const columnStyles = [{ width: '15%', align: 'left' }, { width: '25%', align: 'left' }, { width: '20%', align: 'left' }, { width: '20%', align: 'left' }, { width: '20%', align: 'center' }];
+
+    const columnStyles = [
+        { width: '15%', align: 'left' },  
+        { width: '25%', align: 'left' },  
+        { width: '20%', align: 'left' },  
+        { width: '20%', align: 'left' },  
+        { width: '20%', align: 'center' } 
+    ];
+
     list.forEach((v, index) => {
+        const nocDisplay = v.noc ? v.noc : 'Not Generated';
         const row = document.createElement('tr');
         row.setAttribute('onclick', `toggleVehicleDetails('${v.vehicleNumber}', this)`);
-        row.style.cursor = 'pointer';
-        let actionBtn = (v.noc && userRole === 'admin') ? `<button class="noc-pdf-btn" onclick="event.stopPropagation(); generateDirectNOCPDF('${v.vehicleNumber}')">📄 NOC PDF</button>` : (v.noc ? `<span class="noc-na-text">NOC Generated</span>` : `<span class="noc-na-text">N/A</span>`);
-        [v.vehicleNumber, `${v.surname} ${v.firstName}`, v.loanAg, v.noc || 'Not Generated', actionBtn].forEach((content, i) => {
+        row.style.cursor = 'pointer'; 
+
+        row.dataset.vehicleNumber = v.vehicleNumber;
+        row.dataset.index = index;
+
+        let actionButtonHtml = '';
+        if (v.noc && userRole === 'admin') { 
+            actionButtonHtml = `<button class="noc-pdf-btn" onclick="event.stopPropagation(); generateDirectNOCPDF('${v.vehicleNumber}')">📄 NOC PDF</button>`;
+        } else if (v.noc) {
+            actionButtonHtml = `<span class="noc-na-text">NOC Generated</span>`; 
+        } else {
+            actionButtonHtml = `<span class="noc-na-text">N/A</span>`; 
+        }
+
+        const cells = [
+            v.vehicleNumber,
+            `${v.surname} ${v.firstName}`, 
+            v.loanAg,
+            nocDisplay,
+            actionButtonHtml
+        ];
+
+        cells.forEach((content, i) => {
             const td = document.createElement('td');
             td.innerHTML = content;
             td.style.width = columnStyles[i].width;
             td.style.textAlign = columnStyles[i].align;
+
+            if (i === 4 && v.noc) {
+            } else if (i === 4 && !v.noc) {
+                td.querySelector('.noc-na-text')?.setAttribute('onclick', 'event.stopPropagation()');
+            }
+
             row.appendChild(td);
         });
+        
         tbody.appendChild(row);
     });
 }
 
 function toggleVehicleDetails(vehicleNumber, clickedRow) {
+    const tbody = document.querySelector('#allVehicleTable tbody');
     const existingDetails = document.querySelector(`tr.details-row[data-for="${currentExpandedRow}"]`);
-    if (currentExpandedRow === vehicleNumber) { if (existingDetails) existingDetails.remove(); currentExpandedRow = null; return; }
-    if (existingDetails) existingDetails.remove();
+
+    if (currentExpandedRow === vehicleNumber) {
+        if (existingDetails) {
+            existingDetails.remove();
+        }
+        currentExpandedRow = null;
+        return;
+    }
+    
+    if (existingDetails) {
+        existingDetails.remove();
+    }
+    
     const v = vehicles.find(x => x.vehicleNumber === vehicleNumber);
     if (!v) return;
-    const conflictingLoanAg = checkIfGuarantor(v.loanAg);
-    let nocArea = v.noc ? `<div style="margin-top: 15px;"><strong>Generated NOC:</strong> ${v.noc}</div>` : (userRole === 'admin' ? `<button onclick="event.stopPropagation(); generateNOC('${v.vehicleNumber}', this)" style="margin-top: 15px; padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Generate NOC</button>` : '<div style="margin-top: 15px;">NOC not yet generated.</div>');
-    nocArea += conflictingLoanAg ? `<div style="margin-top: 10px; color: #dc3545; font-weight: bold;">&#9888; WARNING: Guarantor for ${conflictingLoanAg}.</div>` : `<div style="margin-top: 10px; color: #28a745;">&#10003; No Guarantor conflicts.</div>`;
+
+    const formattedGuarantor = v.guarantor;
+    
+    let nocArea = '';
+    const conflictingLoanAg = checkIfGuarantor(v.loanAg); 
+
+    if (v.noc) {
+        nocArea = `<div style="margin-top: 15px;"><strong>Generated NOC:</strong> ${v.noc}</div>`;
+    } 
+    
+    if (userRole === 'admin' && !v.noc) {
+        nocArea += `<button id="generateNOCBtn-${v.vehicleNumber}" onclick="event.stopPropagation(); generateNOC('${v.vehicleNumber}', this)" style="margin-top: 15px; padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Generate NOC</button>`;
+    } else if (!v.noc) {
+        nocArea = '<div style="margin-top: 15px;">NOC not yet generated.</div>';
+    }
+
+    if (conflictingLoanAg) {
+        nocArea += `<div style="margin-top: 10px; color: #dc3545; font-weight: bold;">
+            &#9888; WARNING: This Loan AG (${v.loanAg}) is a Guarantor for active Loan AG ${conflictingLoanAg}.
+        </div>`;
+    } else {
+        nocArea += `<div style="margin-top: 10px; color: #28a745;">
+            &#10003; Customer is not a Guarantor for any other active loan.
+        </div>`;
+    }
+
     const detailsRow = document.createElement('tr');
     detailsRow.className = 'details-row';
     detailsRow.dataset.for = vehicleNumber;
-    detailsRow.innerHTML = `<td colspan="5"><div class="details-container"><div class="info-wrapper"><div class="loan-details-box"><h3>Loan Details</h3><strong>V.No:</strong> ${v.vehicleNumber}<br><strong>Name:</strong> ${v.surname} ${v.firstName}<br><strong>Address:</strong> ${v.address.replace(/\n/g, '<br>')}<br><strong>Phone:</strong> ${v.phone}<br><strong>Guarantor:</strong> ${v.guarantor}<br><strong>Loan AG:</strong> ${v.loanAg}<br><strong>Date:</strong> ${v.loanDate}</div><div class="vehicle-details-box"><h3>Vehicle Details</h3><strong>Maker:</strong> ${v.maker}<br><strong>Class:</strong> ${v.classification}<br><strong>Model:</strong> ${v.model}<br><strong>Chassis:</strong> ${v.chassis}<br><strong>Engine:</strong> ${v.engine}<br><strong>RTO:</strong> ${v.rto}</div></div>${nocArea}</div></td>`;
+    
+    detailsRow.innerHTML = `
+        <td colspan="5">
+            <div class="details-container">
+                <div class="info-wrapper">
+                    <div class="loan-details-box">
+                        <h3>Loan Details</h3>
+                        <strong>Vehicle Number:</strong> ${v.vehicleNumber}<br>
+                        <strong>Name:</strong> ${v.surname} ${v.firstName}<br> 
+                        <strong>Address:</strong> ${v.address.replace(/\n/g, '<br>')}<br>
+                        <strong>Phone:</strong> ${v.phone}<br>
+                        <strong>Guarantor:</strong> ${formattedGuarantor}<br>
+                        <strong>Loan AG Number:</strong> ${v.loanAg}<br>
+                        <strong>Loan Date:</strong> ${v.loanDate}
+                    </div>
+                    <div class="vehicle-details-box">
+                        <h3>Vehicle Details</h3>
+                        <strong>Maker:</strong> ${v.maker}<br>
+                        <strong>Classification:</strong> ${v.classification}<br>
+                        <strong>Model:</strong> ${v.model}<br>
+                        <strong>Chassis:</strong> ${v.chassis}<br>
+                        <strong>Engine:</strong> ${v.engine}<br>
+                        <strong>RTO:</strong> ${v.rto}
+                    </div>
+                </div>
+                ${nocArea}
+            </div>
+        </td>
+    `;
+    
     clickedRow.parentNode.insertBefore(detailsRow, clickedRow.nextSibling);
     currentExpandedRow = vehicleNumber;
 }
 
 function searchInVehicleData() {
     const input = document.getElementById('searchInputData').value.trim().toUpperCase();
-    if (!input) { renderAllTable(vehicles); return; }
-    const filtered = vehicles.filter(v => v.vehicleNumber.includes(input) || `${v.surname} ${v.firstName}`.toUpperCase().includes(input) || v.loanAg.includes(input) || (v.noc && v.noc.includes(input)));
+    if (!input) { 
+        showMessage('Enter search term for Vehicle No., Name, Loan AG No., or NOC.'); 
+        renderAllTable(vehicles); 
+        return; 
+    }
+    
+    const filtered = vehicles.filter(v => 
+        v.vehicleNumber.toUpperCase().includes(input) ||
+        `${v.surname} ${v.firstName}`.toUpperCase().includes(input) ||
+        `${v.firstName} ${v.surname}`.toUpperCase().includes(input) ||
+        v.loanAg.toUpperCase().includes(input) ||
+        (v.noc && v.noc.toUpperCase().includes(input))
+    );
+    
+    if (filtered.length === 0) {
+        showMessage('No records found matching your search criteria.');
+    }
     renderAllTable(filtered);
 }
 
-function resetVehicleDataSearch() { document.getElementById('searchInputData').value = ''; renderAllTable(vehicles); }
+function resetVehicleDataSearch() {
+    document.getElementById('searchInputData').value = '';
+    renderAllTable(vehicles);
+}
 
 function checkIfGuarantor(loanAgToCheck) {
-    if (!loanAgToCheck) return null;
+    if (!loanAgToCheck || loanAgToCheck === 'N/A') return null; 
     const checkString = `LOAN_AG: ${loanAgToCheck.toUpperCase()}`;
-    const conflict = vehicles.find(v => v.guarantor && v.loanAg !== loanAgToCheck && v.guarantor.toUpperCase().includes(checkString));
-    return conflict ? conflict.loanAg : null;
+    const conflictingVehicle = vehicles.find(v => 
+        v.guarantor && 
+        v.loanAg !== loanAgToCheck && 
+        v.guarantor.toUpperCase().includes(checkString)
+    );
+    return conflictingVehicle ? conflictingVehicle.loanAg : null;
 }
 
-function shiftLetters(str) {
-    return str.split('').map(ch => {
-        if (/[A-Z]/.test(ch)) return String.fromCharCode(((ch.charCodeAt(0) - 65 + 1) % 26) + 65);
-        return ch;
-    }).join('');
-}
-
-function incrementPart(numStr) {
-    return numStr.split('').map(d => {
-        if (/[0-9]/.test(d)) return (parseInt(d) + 1) % 10;
-        if (/[A-Z]/.test(d)) return String.fromCharCode(((d.charCodeAt(0) - 65 + 1) % 26) + 65);
-        return d;
-    }).join('');
-}
 
 async function generateNOC(vehicleNumber, buttonElement) {
+    if (userRole !== 'admin') { showMessage('Access denied. Admin rights required.'); return; }
     const v = vehicles.find(x => x.vehicleNumber === vehicleNumber);
-    currentVehicleToNOC = { v, buttonElement };
-    showNOCConfirmation(v, checkIfGuarantor(v.loanAg));
+    if (!v) return;
+    if (v.noc) { showMessage('NOC already generated.'); return; }
+
+    currentVehicleToNOC = { v: v, buttonElement: buttonElement };
+    const conflictingLoanAg = checkIfGuarantor(v.loanAg);
+    showNOCConfirmation(v, conflictingLoanAg);
 }
 
 function showNOCConfirmation(v, conflictingLoanAg) {
     const modal = document.getElementById('nocConfirmationModal');
-    const msg = document.getElementById('modalMessage');
-    const ok = document.getElementById('modalOk');
-    document.getElementById('modalPasswordInput').value = '';
-    msg.innerHTML = conflictingLoanAg ? `<p style="color: red;">&#9888; WARNING: Guarantor for Loan AG ${conflictingLoanAg}. Proceed?</p>` : `<p style="color: green;">No conflicts found for Loan AG ${v.loanAg}.</p>`;
-    ok.onclick = () => { if (document.getElementById('modalPasswordInput').value === ADMIN_PASSWORD) { modal.style.display = 'none'; generateNOCCore(currentVehicleToNOC.v, currentVehicleToNOC.buttonElement); } else { document.getElementById('modalError').style.display = 'block'; }};
-    document.getElementById('modalCancel').onclick = () => modal.style.display = 'none';
+    const messageDiv = document.getElementById('modalMessage');
+    const okButton = document.getElementById('modalOk');
+    const cancelButton = document.getElementById('modalCancel');
+    const passwordInput = document.getElementById('modalPasswordInput');
+    const passwordSection = document.getElementById('modalPasswordSection');
+    const errorDiv = document.getElementById('modalError');
+
+    errorDiv.style.display = 'none';
+    passwordInput.value = '';
+    passwordSection.style.display = 'block';
+    cancelButton.style.display = 'inline-block';
+    okButton.textContent = 'OK (Generate)';
+    okButton.style.backgroundColor = '#28a745';
+
+    if (conflictingLoanAg) {
+        messageDiv.innerHTML = `
+            <p style="color: red; font-weight: bold; font-size: 1.2em;">&#9888; WARNING: Guarantor Conflict &#9888;</p>
+            <p><strong>Loan Ag. No. ${v.loanAg}</strong> customer is the guarantor for <strong>Loan Ag. No ${conflictingLoanAg}</strong>. You can proceed, but please confirm with management if NOC should be generated.</p>
+        `;
+    } else {
+        messageDiv.innerHTML = `
+            <p style="color: green; font-weight: bold;">Guarantor Check Passed:</p>
+            <p>Loan Ag. No. ${v.loanAg} customer is not a guarantor for others. Click **OK** to generate the NOC.</p>
+        `;
+    }
+    
+    okButton.onclick = () => {
+        const password = passwordInput.value;
+        if (password === ADMIN_PASSWORD) {
+            errorDiv.style.display = 'none';
+            modal.style.display = 'none';
+            generateNOCCore(currentVehicleToNOC.v, currentVehicleToNOC.buttonElement);
+        } else {
+            errorDiv.textContent = 'Incorrect password!';
+            errorDiv.style.display = 'block';
+        }
+    };
+    cancelButton.onclick = () => { modal.style.display = 'none'; showMessage('NOC generation cancelled.'); };
+    passwordInput.onkeyup = (event) => { handleModalKey(event, okButton); };
+
     modal.style.display = 'block';
+    passwordInput.focus();
 }
 
-function handleModalKey(event, okButton) { if (event.key === 'Enter') okButton.click(); }
+function handleModalKey(event, okButton) {
+    if (event.key === 'Enter' && okButton) {
+        okButton.click();
+    }
+}
 
 async function generateNOCCore(v, buttonElement) {
-    const vPart = incrementPart(v.vehicleNumber.slice(-4)); 
-    const sPart = shiftLetters(v.surname.slice(0,2).toUpperCase()); 
-    const fPart = shiftLetters(v.firstName.slice(0,2).toUpperCase()); 
-    const ePart = incrementPart(v.engine.slice(-4).toUpperCase()); 
-    const cPart = incrementPart(v.chassis.slice(-3).toUpperCase()); 
+    // 15-Character NOC Logic:
+    // Digits 1–4: Vehicle Number (last 4 digits + 1)
+    const vehiclePart = incrementDigits(v.vehicleNumber.slice(-4));
+    // Digits 5–6: Surname (first 2 letters shifted by 1)
+    const surnamePart = shiftLetters((v.surname || 'XX').slice(0,2).toUpperCase().padEnd(2, 'X'));
+    // Digits 7–8: First Name (first 2 letters shifted by 1)
+    const firstNamePart = shiftLetters((v.firstName || 'XX').slice(0,2).toUpperCase().padEnd(2, 'X'));
+    // Digits 9–12: Engine Number (last 4 characters + 1 logic)
+    const enginePart = incrementDigits((v.engine || '0000').slice(-4).padEnd(4, '0'));
+    // Digits 13–15: Chassis Number (last 3 characters + 1 logic)
+    const chassisPart = incrementDigits((v.chassis || '000').slice(-3).padEnd(3, '0'));
     
-    const noc = vPart + sPart + fPart + ePart + cPart; 
+    const noc = vehiclePart + surnamePart + firstNamePart + enginePart + chassisPart;
 
-    await fetch(`${API_BASE_URL}/${v.vehicleNumber}/noc`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ noc }) });
-    v.noc = noc;
-    showMessage('NOC Saved: ' + noc);
-    fetchAndRenderAllData();
+    try {
+        const response = await fetch(`${API_BASE_URL}/${v.vehicleNumber}/noc`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ noc: noc })
+        });
+        if (!response.ok) throw new Error('Failed to save NOC to server.');
+        v.noc = noc;
+        showMessage('NOC Generated and Saved: ' + noc);
+
+        if (buttonElement) {
+            const parentDiv = buttonElement.parentNode;
+            buttonElement.remove();
+            const existingNocDiv = parentDiv.querySelector('div strong');
+            if (existingNocDiv) {
+                existingNocDiv.parentNode.innerHTML = `<strong>Generated NOC:</strong> ${noc}`;
+            }
+
+            const mainRow = document.querySelector(`tr[data-vehicle-number="${v.vehicleNumber}"]`);
+            if (mainRow) {
+                mainRow.cells[3].textContent = noc; 
+                if (userRole === 'admin') {
+                    mainRow.cells[4].innerHTML = `<button class="noc-pdf-btn" onclick="event.stopPropagation(); generateDirectNOCPDF('${v.vehicleNumber}')">📄 NOC PDF</button>`;
+                } else {
+                     mainRow.cells[4].innerHTML = `<span class="noc-na-text">NOC Generated</span>`;
+                }
+                mainRow.cells[4].style.textAlign = 'center';
+            }
+        }
+        vehicles = vehicles.map(item => item.vehicleNumber === v.vehicleNumber ? v : item);
+
+    } catch (error) {
+        console.error('Error saving NOC:', error);
+        showMessage('Failed to save NOC. Server error.');
+    }
 }
 
+
+function shiftLetters(str) {
+    return str.split('').map(ch => {
+        if (/[A-Z]/.test(ch)) return String.fromCharCode(((ch.charCodeAt(0) - 65 + 1) % 26) + 65);
+        if (/[a-z]/.test(ch)) return String.fromCharCode(((ch.charCodeAt(0) - 97 + 1) % 26) + 97);
+        return ch;
+    }).join('');
+}
+
+function incrementDigits(numStr) {
+    return numStr.split('').map(d => {
+        if (/\d/.test(d)) return (parseInt(d) + 1) % 10;
+        return d;
+    }).join('');
+}
+
+
 async function generateDirectNOCPDF(vehicleNumber) {
+    if (userRole !== 'admin') { showMessage('Access denied. Only admin can print NOC.'); return; }
     const v = vehicles.find(x => x.vehicleNumber === vehicleNumber);
-    let rtaLoc = prompt('Enter RTO location:', v.rto.toUpperCase());
-    if (rtaLoc !== null) await generateNOCPDFCore(v, rtaLoc || 'KAKINADA');
+    if (!v) { showMessage('Vehicle not found.'); return; }
+    if (!v.noc) { showMessage('NOC must be generated first.'); return; }
+
+    let rtaLoc = prompt('Enter RTO location (e.g. KAKINADA):', v.rto.toUpperCase() || 'KAKINADA');
+    if (rtaLoc === null) { showMessage('NOC PDF generation cancelled by user.'); return; }
+    if (rtaLoc === "") { rtaLoc = 'KAKINADA'; }
+    await generateNOCPDFCore(v, rtaLoc);
 }
 
 async function generateNOCPDFCore(v, rtaLoc) {
-    const date = new Date().toLocaleDateString('en-GB').replace(/\//g, '-');
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth()+1).padStart(2, '0');
+    const year = today.getFullYear();
+    const formattedDate = `${day}-${month}-${year}`;
+
     document.getElementById('noc_number').textContent = v.noc;
-    document.getElementById('noc_date').textContent = date;
+    document.getElementById('noc_date').textContent = formattedDate;
     document.getElementById('rta_location').textContent = rtaLoc.toUpperCase();
-    
-    document.getElementById('noc_customer_address').innerHTML = `<strong>${v.surname} ${v.firstName}</strong><br>${v.address.replace(/\n/g, '<br>')}<br><strong>Phone:</strong> ${v.phone}`;
-    
-    document.getElementById('noc_vno').textContent = v.vehicleNumber;
-    document.getElementById('noc_engine').textContent = v.engine;
-    document.getElementById('noc_chassis').textContent = v.chassis;
-    document.getElementById('noc_class').textContent = v.classification;
-    document.getElementById('noc_loanDate').textContent = v.loanDate;
-    document.getElementById('noc_loanag').textContent = v.loanAg;
-    document.getElementById('noc_maker').textContent = v.maker;
-    document.getElementById('noc_model').textContent = v.model;
+
+    const borrowerName = `${v.surname} ${v.firstName}`; 
+    const borrowerAddress = v.address.replace(/\n/g, '<br>');
+    document.getElementById('noc_customer_address').innerHTML = `<strong>${borrowerName}</strong><br>${borrowerAddress}`;
+    document.getElementById('noc_customer_phone').innerHTML = `<strong>Mobile:</strong> ${v.phone}`;
+
+    document.getElementById('noc_vno').textContent = v.vehicleNumber || '';
+    document.getElementById('noc_engine').textContent = v.engine || '';
+    document.getElementById('noc_chassis').textContent = v.chassis || '';
+    document.getElementById('noc_class').textContent = v.classification || '';
+    document.getElementById('noc_loanDate').textContent = v.loanDate || '';
+    document.getElementById('noc_loanag').textContent = v.loanAg || '';
+    document.getElementById('noc_maker').textContent = v.maker || '';
+    document.getElementById('noc_model').textContent = v.model || '';
 
     const template = document.getElementById('nocTemplate');
     const wrapper = document.getElementById('nocTemplateWrapper');
+    wrapper.style.position = 'absolute';
     wrapper.style.left = '0';
-    const canvas = await html2canvas(template, { scale: 3 });
+    template.style.display = 'block';
+
+    const canvas = await html2canvas(template, { scale: 3, useCORS: true, backgroundColor: '#ffffff' });
     const imgData = canvas.toDataURL('image/jpeg', 1.0);
-    const pdf = new jsPDF({ unit: 'pt', format: 'a4' });
-    pdf.addImage(imgData, 'JPEG', 20, 20, 555, 780);
-    pdf.save(`NOC_${v.vehicleNumber}.pdf`);
+    const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const imgProps = pdf.getImageProperties(imgData);
+    const imgWidth = pageWidth - 40;
+    const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
+    pdf.addImage(imgData, 'JPEG', 20, 20, imgWidth, imgHeight);
+    pdf.save('NOC_' + v.vehicleNumber + '.pdf');
+    showMessage('NOC PDF downloaded!');
+    template.style.display = 'none';
+    wrapper.style.position = 'absolute';
     wrapper.style.left = '-9999px';
 }
 
 function toggleAddressFields(forceHide = false) {
-    const fields = document.getElementById('addressFields');
-    if (forceHide) fields.style.display = 'none';
-    else fields.style.display = fields.style.display === 'none' ? 'block' : 'none';
+    const addressFields = document.getElementById('addressFields');
+    const combinedAddressInput = document.getElementById('combinedAddress');
+    const isVisible = addressFields.style.display !== 'none';
+
+    if (!isVisible && !forceHide) {
+        addressFields.style.display = 'block'; 
+        combinedAddressInput.removeAttribute('required');
+        document.getElementById('hNo').required = true;
+        document.getElementById('addressLine').required = true;
+        document.getElementById('city').required = true;
+        document.getElementById('pinCode').required = true;
+        document.getElementById('state').required = true;
+    } else {
+        addressFields.style.display = 'none';
+        combinedAddressInput.setAttribute('required', 'required');
+        document.getElementById('hNo').required = false;
+        document.getElementById('addressLine').required = false;
+        document.getElementById('city').required = false;
+        document.getElementById('pinCode').required = false;
+        document.getElementById('state').required = false;
+        document.getElementById('hNo').value = '';
+        document.getElementById('addressLine').value = '';
+        document.getElementById('city').value = '';
+        document.getElementById('pinCode').value = '';
+        document.getElementById('state').value = '';
+    }
 }
 
 function toggleGuarantorFields(forceHide = false) {
-    const fields = document.getElementById('guarantorFields');
-    if (forceHide) fields.style.display = 'none';
-    else fields.style.display = fields.style.display === 'none' ? 'block' : 'none';
+    const guarantorFields = document.getElementById('guarantorFields');
+    if (forceHide) {
+        guarantorFields.style.display = 'none';
+        document.getElementById('guarantorSurname').value = '';
+        document.getElementById('guarantorName').value = '';
+        document.getElementById('guarantorLoanAg').value = '';
+    } else {
+        guarantorFields.style.display = (guarantorFields.style.display === 'none' || guarantorFields.style.display === '') ? 'block' : 'none';
+    }
 }
+
 
 async function addVehicle(e) {
     e.preventDefault();
-    const address = `H.No: ${document.getElementById('hNo').value}\n${document.getElementById('addressLine').value}\n${document.getElementById('city').value} - ${document.getElementById('pinCode').value}\n${document.getElementById('state').value}`;
+    
+    if (document.getElementById('addressFields').style.display === 'block') {
+        const hNo = document.getElementById('hNo').value.trim();
+        const addressLine = document.getElementById('addressLine').value.trim();
+        const city = document.getElementById('city').value.trim();
+        const pinCode = document.getElementById('pinCode').value.trim();
+        const state = document.getElementById('state').value.trim();
+        if (!hNo || !addressLine || !city || !pinCode || !state) {
+            showMessage('Please fill all address details.');
+            return;
+        }
+    } else {
+        showMessage('Please click the "Address" field and enter details.');
+        return;
+    }
+
+    let guarantorDetails = 'N/A';
+    if (document.getElementById('guarantorFields').style.display === 'block') {
+        const gSurname = document.getElementById('guarantorSurname').value.trim();
+        const gName = document.getElementById('guarantorName').value.trim();
+        const gLoanAg = document.getElementById('guarantorLoanAg').value.trim().toUpperCase(); 
+        if (gSurname || gName || gLoanAg) {
+            if (!gSurname || !gName || !gLoanAg) {
+                showMessage('Guarantor Details are incomplete.');
+                return;
+            }
+            const guarantorVehicle = vehicles.find(v => v.loanAg === gLoanAg);
+            if (!guarantorVehicle) {
+                showMessage(`Guarantor Loan AG Number (${gLoanAg}) must match an existing Loan AG.`);
+                return;
+            }
+            guarantorDetails = `${gSurname} ${gName} | LOAN_AG: ${gLoanAg}`;
+        }
+    }
+    
+    const vehicleNum = document.getElementById('vehicleNumber').value.trim().toUpperCase();
+    if (vehicleNum.length !== 10) { showMessage('Vehicle number must be 10 characters.'); return; }
+
+    const phoneNum = document.getElementById('phone').value.trim();
+    if (phoneNum.length !== 10 || !/^\d{10}$/.test(phoneNum)) { showMessage('Mobile must be 10 digits.'); return; }
+    
+    const fullLoanAg = document.getElementById('loanAg').value.trim().toUpperCase();
+    const conflictingLoanAg = checkIfGuarantor(fullLoanAg);
+    if (conflictingLoanAg) {
+        showMessage(`Blocked: Loan AG (${fullLoanAg}) is already a Guarantor for Loan AG ${conflictingLoanAg}.`);
+        return;
+    }
+    
+    const address = 
+        `H.No: ${document.getElementById('hNo').value.trim()}\n` + 
+        `${document.getElementById('addressLine').value.trim()}\n` +
+        `${document.getElementById('city').value.trim()} - ${document.getElementById('pinCode').value.trim()}\n` +
+        `${document.getElementById('state').value.trim()}`;
+    
     const newVehicle = {
-        surname: document.getElementById('surname').value,
-        firstName: document.getElementById('firstName').value,
-        phone: document.getElementById('phone').value,
+        surname: document.getElementById('surname').value.trim(),
+        firstName: document.getElementById('firstName').value.trim(),
+        phone: phoneNum,
         address: address,
-        vehicleNumber: document.getElementById('vehicleNumber').value.toUpperCase(),
-        loanAg: document.getElementById('loanAg').value.toUpperCase(),
+        vehicleNumber: vehicleNum,
+        loanAg: fullLoanAg,
         loanDate: document.getElementById('loanDate').value,
-        guarantor: document.getElementById('guarantorSurname').value ? `${document.getElementById('guarantorSurname').value} ${document.getElementById('guarantorName').value} | LOAN_AG: ${document.getElementById('guarantorLoanAg').value}` : 'N/A',
-        maker: document.getElementById('maker').value,
-        classification: document.getElementById('classification').value,
-        model: document.getElementById('model').value,
-        chassis: document.getElementById('chassis').value,
-        engine: document.getElementById('engine').value,
-        rto: document.getElementById('rto').value,
+        guarantor: guarantorDetails,
+        maker: document.getElementById('maker').value.trim(),
+        classification: document.getElementById('classification').value.trim(),
+        model: document.getElementById('model').value.trim(),
+        chassis: document.getElementById('chassis').value.trim(),
+        engine: document.getElementById('engine').value.trim(),
+        rto: document.getElementById('rto').value.trim(),
     };
-    await fetch(API_BASE_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(newVehicle) });
-    showMessage('Vehicle added!');
-    goHome();
+
+    try {
+        const response = await fetch(API_BASE_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(newVehicle) });
+        const result = await response.json();
+        if (!response.ok) {
+            if (response.status === 400 && result.message && result.message.includes('Vehicle number already exists')) {
+                showMessage('Error: This Vehicle Number is already in the database.');
+            } else {
+                throw new Error(`Failed to add vehicle: ${result.message || response.statusText}`);
+            }
+            return;
+        }
+        showMessage('Vehicle added successfully!');
+        document.getElementById('vehicleForm').reset();
+        toggleAddressFields(true);
+        toggleGuarantorFields(true);
+        goHome();
+    } catch (error) {
+        console.error('Error adding vehicle:', error);
+        showMessage('Failed to add vehicle.');
+    }
 }
 
-function printVehicleData() { window.print(); }
+function printVehicleData() {
+    const dataToPrint = vehicles; 
+    if (dataToPrint.length === 0) { showMessage("No data to print."); return; }
+
+    const printTemplateHtml = document.getElementById('detailedPrintTemplate').innerHTML;
+    let allRecordsHtml = '';
+    const now = new Date();
+    const formattedTime = `${now.getMonth()+1}/${now.getDate()}/${String(now.getFullYear()).slice(2)}, ${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')} ${now.getHours() >= 12 ? 'PM' : 'AM'}`;
+
+    dataToPrint.forEach(v => {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = printTemplateHtml;
+        const record = tempDiv.querySelector('.print-record');
+        const conflictingLoanAg = checkIfGuarantor(v.loanAg); 
+        let nocStatusHtml = v.noc ? `<div><strong>Generated NOC:</strong> ${v.noc}</div>` : '<div>NOC not yet generated.</div>';
+        nocStatusHtml += conflictingLoanAg ? `<div style="margin-top: 10px; color: #dc3545; font-weight: bold;">&#9888; Warning: Guarantor Conflict for Loan AG ${conflictingLoanAg}</div>` : `<div style="margin-top: 10px; color: #28a745;">&#10003; No Guarantor Conflict</div>`;
+        
+        record.querySelector('#print_vehicleName').textContent = `${v.surname} ${v.firstName} - ${v.vehicleNumber} Details`;
+        record.querySelector('#print_vno').textContent = v.vehicleNumber;
+        record.querySelector('#print_name').textContent = `${v.surname} ${v.firstName}`;
+        record.querySelector('#print_address').innerHTML = v.address.replace(/\n/g, '<br>');
+        record.querySelector('#print_phone').textContent = v.phone;
+        record.querySelector('#print_guarantor').textContent = v.guarantor;
+        record.querySelector('#print_loanAg').textContent = v.loanAg;
+        record.querySelector('#print_loanDate').textContent = v.loanDate;
+        record.querySelector('#print_maker').textContent = v.maker;
+        record.querySelector('#print_classification').textContent = v.classification;
+        record.querySelector('#print_model').textContent = v.model;
+        record.querySelector('#print_chassis').textContent = v.chassis;
+        record.querySelector('#print_engine').textContent = v.engine;
+        record.querySelector('#print_rto').textContent = v.rto;
+        record.querySelector('#print_nocStatus').innerHTML = nocStatusHtml;
+        allRecordsHtml += record.outerHTML;
+    });
+
+    const printWindow = window.open('', '', 'width=900,height=700');
+    printWindow.document.write('<html><head><title>Print - Detailed Vehicle Data</title><style>body { font-family: Inter, Arial; padding: 20px; } .print-record { padding: 20px; background-color: #f0f8ff; border: 1px solid #cceeff; border-radius: 10px; margin-bottom: 20px; page-break-after: always; } .print-record h2 { color: #0d6efd; border-bottom: 2px solid #ddd; } .info-wrapper { display: flex; flex-wrap: wrap; gap: 20px; } .loan-details-box, .vehicle-details-box { border: 1px solid #b3d9ff; padding: 15px; background: #fff; flex: 1 1 300px; border-radius: 8px; } @media print { .print-record { box-shadow: none; border: 1px solid #ccc; background-color: #fff; } }</style></head><body><h1 style="text-align:center;">Sri Lakshmi Ganesh Auto Finance</h1><p style="text-align:right;">Printed: ${formattedTime}</p>' + allRecordsHtml + '</body></html>');
+    printWindow.document.close();
+    printWindow.focus();
+    setTimeout(() => { printWindow.print(); printWindow.close(); }, 500);
+}
+
 
 function deleteWithPassword() {
-    const vNo = prompt('Enter vehicle number:');
-    if (vNo && prompt('Admin Password:') === ADMIN_PASSWORD) deleteVehicle(vNo.toUpperCase());
+    if (userRole !== 'admin') { showMessage('Access denied.'); return; }
+    const vehicleNum = prompt('Enter vehicle number to delete:');
+    if (!vehicleNum) return;
+    const password = prompt('Enter admin password:');
+    if (password !== ADMIN_PASSWORD) { showMessage('Incorrect password!'); return; }
+    deleteVehicle(vehicleNum.trim().toUpperCase());
 }
 
-async function deleteVehicle(vNo) {
-    await fetch(`${API_BASE_URL}/${vNo}`, { method: 'DELETE' });
-    fetchAndRenderAllData();
+async function deleteVehicle(vehicleNumber) {
+    try {
+        const v = vehicles.find(x => x.vehicleNumber === vehicleNumber);
+        const conflictingLoanAg = v ? checkIfGuarantor(v.loanAg) : null;
+        if (v && conflictingLoanAg) {
+            showMessage(`Deletion BLOCKED: Active as Guarantor for ${conflictingLoanAg}.`);
+            return;
+        }
+        const response = await fetch(`${API_BASE_URL}/${vehicleNumber}`, { method: 'DELETE' });
+        if (!response.ok) throw new Error('Failed to delete.');
+        showMessage('Deleted successfully!');
+        fetchAndRenderAllData();
+    } catch (error) {
+        showMessage('Failed to delete.');
+    }
 }
 </script>
+
 </body>
 </html>

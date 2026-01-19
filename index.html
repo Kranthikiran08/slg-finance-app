@@ -230,7 +230,7 @@ input, textarea, select { margin: 5pt 0; padding: 10px; border: 1px solid #ccc; 
         <label><span>State:</span> <input type="text" id="state" value="" placeholder="State" class="uppercase-input"></label>
     </div>
 </label>
-<label><span>Vehicle Number (10 Chars):</span> <input type="text" id="vehicleNumber" required maxlength="10" class="uppercase-input"></label>
+<label><span>Vehicle Number:</span> <input type="text" id="vehicleNumber" required class="uppercase-input"></label>
 <label><span>Loan AG Number:</span> <input type="text" id="loanAg" required class="uppercase-input"></label>
 <label><span>Loan Date:</span> <input type="date" id="loanDate" required></label>
 <label>
@@ -738,16 +738,10 @@ function handleModalKey(event, okButton) {
 }
 
 async function generateNOCCore(v, buttonElement) {
-    // 15-Character NOC Logic:
-    // Digits 1–4: Vehicle Number (last 4 digits + 1)
     const vehiclePart = incrementDigits(v.vehicleNumber.slice(-4));
-    // Digits 5–6: Surname (first 2 letters shifted by 1)
     const surnamePart = shiftLetters((v.surname || 'XX').slice(0,2).toUpperCase().padEnd(2, 'X'));
-    // Digits 7–8: First Name (first 2 letters shifted by 1)
     const firstNamePart = shiftLetters((v.firstName || 'XX').slice(0,2).toUpperCase().padEnd(2, 'X'));
-    // Digits 9–12: Engine Number (last 4 characters + 1 logic)
     const enginePart = incrementDigits((v.engine || '0000').slice(-4).padEnd(4, '0'));
-    // Digits 13–15: Chassis Number (last 3 characters + 1 logic)
     const chassisPart = incrementDigits((v.chassis || '000').slice(-3).padEnd(3, '0'));
     
     const noc = vehiclePart + surnamePart + firstNamePart + enginePart + chassisPart;
@@ -944,8 +938,6 @@ async function addVehicle(e) {
     }
     
     const vehicleNum = document.getElementById('vehicleNumber').value.trim().toUpperCase();
-    if (vehicleNum.length !== 10) { showMessage('Vehicle number must be 10 characters.'); return; }
-
     const phoneNum = document.getElementById('phone').value.trim();
     if (phoneNum.length !== 10 || !/^\d{10}$/.test(phoneNum)) { showMessage('Mobile must be 10 digits.'); return; }
     

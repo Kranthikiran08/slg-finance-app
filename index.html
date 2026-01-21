@@ -1037,28 +1037,33 @@ function printVehicleData() {
 
 
 function deleteWithPassword() {
-    if (userRole !== 'admin') { showMessage('Access denied.'); return; }
+    if (userRole !== 'admin') { showMessage('Access denied. Admin rights required.'); return; }
     const vehicleNum = prompt('Enter vehicle number to delete:');
     if (!vehicleNum) return;
-    const password = prompt('Enter admin password:');
+    const password = prompt('Enter admin password to confirm deletion:');
     if (password !== ADMIN_PASSWORD) { showMessage('Incorrect password!'); return; }
-    deleteVehicle(vehicleNum.trim().toUpperCase());
+    
+    const v = vehicles.find(x => x.vehicleNumber === vehicleNum.trim().toUpperCase());
+    const conflictingLoanAg = v ? checkIfGuarantor(v.loanAg) : null;
+    
+    if (v && conflictingLoanAg) {
+        if (confirm(`AG No. ${v.loanAg} is guarantor to this BAG No. ${conflictingLoanAg}. Click OK to delete the vehicle number.`)) {
+            deleteVehicle(vehicleNum.trim().toUpperCase());
+        }
+    } else {
+        deleteVehicle(vehicleNum.trim().toUpperCase());
+    }
 }
 
 async function deleteVehicle(vehicleNumber) {
     try {
-        const v = vehicles.find(x => x.vehicleNumber === vehicleNumber);
-        const conflictingLoanAg = v ? checkIfGuarantor(v.loanAg) : null;
-        if (v && conflictingLoanAg) {
-            showMessage(`Deletion BLOCKED: Active as Guarantor for ${conflictingLoanAg}.`);
-            return;
-        }
         const response = await fetch(`${API_BASE_URL}/${vehicleNumber}`, { method: 'DELETE' });
-        if (!response.ok) throw new Error('Failed to delete.');
-        showMessage('Deleted successfully!');
+        if (!response.ok) throw new Error('Failed to delete vehicle.');
+        showMessage('Vehicle deleted successfully!');
         fetchAndRenderAllData();
     } catch (error) {
-        showMessage('Failed to delete.');
+        console.error('Error deleting vehicle:', error);
+        showMessage('Failed to delete vehicle. Check server connection.');
     }
 }
 </script>
